@@ -66,6 +66,11 @@ namespace ringcache{
                 init_hash_power = HASH_POWER_MAX;
             }
             this->hash_power = init_hash_power;
+//            /**
+//             * hash表初始化：此处将hash_power固定为28，最大容量为2.6亿左右，容纳所有的数据足够了，就将扩容操作取消了
+//             * 此时hashtable的数组部分占了2G的额外空间。
+//             */
+//            this->hash_power = 28;
             this->primary_hashtable = (entry_t **) calloc(HASH_SIZE(this->hash_power), sizeof(entry_t *));
             for (uint32_t i = 0; i < HASH_SIZE(this->hash_power); i++){
                 this->primary_hashtable[i] = nullptr;
@@ -81,7 +86,7 @@ namespace ringcache{
             this->hashtable_expanding_index = -1;
 
             /**
-             * 一个扩容hash表线程、一个申请内存的线程
+             * 一个扩容hash表线程、一个申请内存的线程。当hash_power固定后，就可以将hashtable扩容的线程干掉了
              */
             this->expand_hashtable_thread = new std::thread(&ringcache::expand_hashtable_func, this);
             this->expand_buffer_thread = new std::thread(&ringcache::expand_buffer_func, this);
