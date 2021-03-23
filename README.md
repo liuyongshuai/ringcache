@@ -14,11 +14,11 @@
 
 # 几个重要的宏
 
-`MAX_KEY_SIZE`：最大的key的长度
+`MAX_KEY_SIZE`：最大的key的长度。
 
 `MAX_VALUE_SIZE`：最大的value的长度
 
-`RING_BUFFER_NUM`：将所给的内存划分的缓冲区个数，个数越大应对并发的能力越强
+`RING_BUFFER_NUM`：将所给的内存划分的缓冲区个数，个数越大应对并发的能力越强，默认256个足够了。对于读多写少的场景，直接64或128都足够了。
 
 `RING_BUFFER_MIN_SIZE`：每个缓冲区的最小大小，可以自己调。
 
