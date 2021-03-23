@@ -27,7 +27,7 @@ list(APPEND include_list ${src_home})
 include_directories(${include_list})
 
 # library file list
-set(library_list -lpthread -lz -lrt -ldl)
+set(library_list -lpthread -lz )
 
 add_executable(test ${work_home}/test.cpp)
 target_link_libraries(test ${library_list})
