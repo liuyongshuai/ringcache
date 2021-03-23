@@ -9,9 +9,10 @@
 #include<string.h>
 #include<stdio.h>
 #include<stdint.h>
-#include "ringcache/ringcache.h"
 
+//目前划分为2个缓冲区
 #define RING_BUFFER_NUM 2
+#include "ringcache/ringcache.h"
 
 int main(){
     //16M大小的缓存
