@@ -41,7 +41,9 @@
 #define AVG_DATA_SIZE 512
 
 //buffer相关，最小的buffer大小及固定的buffer数量，QPS过高时可调大buffer数量
+#ifndef RING_BUFFER_NUM
 #define RING_BUFFER_NUM 256
+#endif
 #define RING_BUFFER_MIN_SIZE (MAX_VALUE_SIZE*2)
 
 //错误码相关
