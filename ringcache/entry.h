@@ -181,6 +181,9 @@ namespace ringcache{
          */
         void key(std::string &key) const{
             key.clear();
+            if (this->key_len == 0){
+                return;
+            }
             key.append(this->data, this->key_len);
         }
 
@@ -189,6 +192,9 @@ namespace ringcache{
          */
         void value(std::string &value) const{
             value.clear();
+            if (this->key_len == 0){
+                return;
+            }
             value.append(this->data + this->key_len, this->value_len);
         }
 

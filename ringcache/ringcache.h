@@ -168,9 +168,8 @@ namespace ringcache{
                     else{
                         pre->hash_next = cur->hash_next;
                     }
-                    cur->hash_next = nullptr;
-                    cur->expire_time = 1;
                     cur->key_len = 0;
+                    cur->expire_time = 1;
                     cur = cur->hash_next;
                     continue;
                 }
@@ -212,9 +211,8 @@ namespace ringcache{
                     else{
                         pre->hash_next = cur->hash_next;
                     }
-                    cur->hash_next = nullptr;
-                    cur->expire_time = 1;
                     cur->key_len = 0;
+                    cur->expire_time = 1;
                     cur = next;
                     continue;
                 }
@@ -251,17 +249,19 @@ namespace ringcache{
             entry_t **hash_entry = this->get_hashtable_bucket(hash_val);
 
             entry_t *entry = *hash_entry;
+            entry_t *next = nullptr;
             uint32_t klen = key.length();
             std::string tmpKey;
             int64_t ct = time(nullptr);
             while (entry != nullptr){
+                next = entry->hash_next;
                 if (entry->key_len != klen){
-                    entry = entry->hash_next;
+                    entry = next;
                     continue;
                 }
                 entry->key(tmpKey);
                 if (tmpKey != key){
-                    entry = entry->hash_next;
+                    entry = next;
                     continue;
                 }
                 //过期了
